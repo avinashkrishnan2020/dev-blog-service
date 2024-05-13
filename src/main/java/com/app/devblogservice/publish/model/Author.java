@@ -1,19 +1,25 @@
 package com.app.devblogservice.publish.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "author")
 public class Author {
+    @Id
+    @Column(name = "author_id")
+    private String authorId;
+    @Column(name="first_name")
     private String firstName;
+    @Column(name="last_name")
     private String lastName;
-    private Date dateOfBirth;
 
 }

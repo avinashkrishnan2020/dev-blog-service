@@ -1,9 +1,10 @@
 package com.app.devblogservice.publish.controller;
 
 
-import com.app.devblogservice.publish.model.NewArticle;
+import com.app.devblogservice.publish.model.Article;
 import com.app.devblogservice.publish.service.ArticlePublishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +23,8 @@ public class PublishServiceController {
     }
 
     @PostMapping("/publish")
-    public ResponseEntity<?> publishArticle(@RequestBody NewArticle newArticle){
-        this.articlePublishService.publishNewArticle(newArticle);
-        return null;
+    public ResponseEntity<?> publishArticle(@RequestBody Article newArticle){
+        Article article = this.articlePublishService.publishNewArticle(newArticle);
+        return new ResponseEntity<>(article, HttpStatus.OK);
     }
 }
