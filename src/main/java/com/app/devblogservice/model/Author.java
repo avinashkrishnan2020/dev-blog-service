@@ -1,5 +1,6 @@
-package com.app.devblogservice.publish.model;
+package com.app.devblogservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +22,7 @@ public class Author {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
+    @Column(name="password")
+    private String password;
 
 }
