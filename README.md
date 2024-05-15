@@ -105,3 +105,9 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
         "password": "def453457@789"
       }
       ``` 
+
+## Improvements to be made
+- Using @Transient to remove fields like password form the response in GET /article endpoint
+  - Create a separate entity class for signup to make this easier
+- Using spring security for implementing authentication and authorization
+- Hashing passwords before persisting to database.
