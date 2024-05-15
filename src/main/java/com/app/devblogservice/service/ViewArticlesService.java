@@ -5,7 +5,9 @@ import com.app.devblogservice.model.Article;
 import com.app.devblogservice.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ViewArticlesService {
@@ -16,21 +18,15 @@ public class ViewArticlesService {
         this.articleRepository = articleRepository;
     }
 
-    public List<Article> getAllArticles() throws DatabaseConnectivityException {
-        try {
-            List<Article> articles = this.articleRepository.findAll();
-            return articles;
-        } catch(Exception ex){
-            throw new DatabaseConnectivityException();
-        }
+    public List<Article> getAllArticles() {
+        return Optional.ofNullable(this.articleRepository.findAll())
+                .orElse(new ArrayList<>());
+
     }
 
-    public List<Article> getAllArticlesByAuthor(String author) throws DatabaseConnectivityException {
-        try {
-            List<Article> articles = this.articleRepository.findByAuthor(author);
-            return articles;
-        } catch(Exception ex){
-            throw new DatabaseConnectivityException();
-        }
+    public List<Article> getAllArticlesByAuthor(String authorId) throws DatabaseConnectivityException {
+        List<Article> articles = this.articleRepository.findByAuthor(authorId);
+        return articles;
+
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dev-blog-service/article")
+@RequestMapping("/article")
 public class DevBlogController {
 
     private final ArticlePublishService articlePublishService;
@@ -29,7 +29,6 @@ public class DevBlogController {
 
     @PostMapping
     public ResponseEntity<Article> publishArticle(@RequestBody Article newArticle) throws InvalidRequestException {
-        this.articlePublishService.sanitizeRequest(newArticle);
         Article article = this.articlePublishService.publishNewArticle(newArticle);
         return new ResponseEntity<>(article, HttpStatus.OK);
     }
@@ -40,8 +39,8 @@ public class DevBlogController {
         return new ResponseEntity<>(this.viewArticlesService.getAllArticles(), HttpStatus.OK);
     }
 
-    @GetMapping(params={"author"})
-    public ResponseEntity<List<Article>> getArticlesByAuthor(@RequestParam(name="author", required=false)String author) throws DatabaseConnectivityException {
-        return new ResponseEntity<>(this.viewArticlesService.getAllArticlesByAuthor(author), HttpStatus.OK);
+    @GetMapping(params={"authorId"})
+    public ResponseEntity<List<Article>> getArticlesByAuthor(@RequestParam(name="authorId", required=false)String authorId) throws DatabaseConnectivityException {
+        return new ResponseEntity<>(this.viewArticlesService.getAllArticlesByAuthor(authorId), HttpStatus.OK);
     }
 }

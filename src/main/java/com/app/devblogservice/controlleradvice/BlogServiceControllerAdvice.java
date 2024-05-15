@@ -1,18 +1,22 @@
 package com.app.devblogservice.controlleradvice;
 
-import com.app.devblogservice.exception.AuthorIdExistsException;
+import com.app.devblogservice.exception.AuthorExistsException;
+import com.app.devblogservice.exception.LoginFailedException;
 import com.app.devblogservice.model.BlogServiceErrorResponse;
 import com.app.devblogservice.model.builder.BlogServiceErrorResponseBuilder;
 import com.app.devblogservice.util.Constants;
 import com.app.devblogservice.exception.DatabaseConnectivityException;
 import com.app.devblogservice.exception.InvalidRequestException;
+import com.app.devblogservice.util.ErrorMessage;
+import org.hibernate.TransientPropertyValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class BlogServiceControllerAdvice {
 
     @ExceptionHandler(InvalidRequestException.class)
@@ -27,23 +31,35 @@ public class BlogServiceControllerAdvice {
 
     }
 
-    @ExceptionHandler(DatabaseConnectivityException.class)
+    @ExceptionHandler(TransientPropertyValueException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<BlogServiceErrorResponse> handleServeError(Exception ex){
         BlogServiceErrorResponse errorResponse = new BlogServiceErrorResponseBuilder()
                 .status(Constants.FAILED)
-                .message("Server Error")
+                .message(ErrorMessage.INVALID_DETAILS)
                 .errorCode(Constants.SERVER_ERROR)
                 .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(AuthorIdExistsException.class)
+    @ExceptionHandler(AuthorExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<BlogServiceErrorResponse> serveInvalidAuthorIdException(Exception ex){
+    public ResponseEntity<BlogServiceErrorResponse> serveAuthorExistsException(Exception ex){
         BlogServiceErrorResponse errorResponse = new BlogServiceErrorResponseBuilder()
                 .status(Constants.FAILED)
-                .message("user id already exists")
+                .message(ErrorMessage.AUTHOR_EXISTS)
+                .errorCode(Constants.BAD_REQUEST)
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler(LoginFailedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<BlogServiceErrorResponse> serveLoginFailedException(Exception ex){
+        BlogServiceErrorResponse errorResponse = new BlogServiceErrorResponseBuilder()
+                .status(Constants.FAILED)
+                .message(ex.getMessage())
                 .errorCode(Constants.BAD_REQUEST)
                 .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);

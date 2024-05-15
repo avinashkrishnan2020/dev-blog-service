@@ -11,4 +11,5 @@ public interface AuthorRepository extends JpaRepository<Author, String> {
 
     @Query("select a from Author a where a.authorId= :username AND a.password= :password")
     public Author findByAuthorIdAndPassword(String username, String password);
+
 }

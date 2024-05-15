@@ -1,8 +1,7 @@
 package com.app.devblogservice.controller;
 
-import com.app.devblogservice.exception.AuthorIdExistsException;
+import com.app.devblogservice.exception.AuthorExistsException;
 import com.app.devblogservice.exception.BadRequestException;
-import com.app.devblogservice.exception.DatabaseConnectivityException;
 import com.app.devblogservice.model.Author;
 import com.app.devblogservice.service.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class SignUpController {
     }
 
     @PostMapping
-    public ResponseEntity<Author> signUpNewUser(@RequestBody Author userDetails) throws AuthorIdExistsException, DatabaseConnectivityException, BadRequestException {
+    public ResponseEntity<Author> signUpNewUser(@RequestBody Author userDetails) throws AuthorExistsException, BadRequestException {
         return new ResponseEntity<>(signUpService.signUpAuthor(userDetails), HttpStatus.OK);
     }
 }

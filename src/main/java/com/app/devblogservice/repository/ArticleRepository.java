@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ArticleRepository extends JpaRepository<Article, String> {
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query("Select a from Article a where a.author =:author")
-    public List<Article> findByAuthor(@Param("author") String author);
+    @Query("Select a from Article a where a.author.authorId =:authorId")
+    public List<Article> findByAuthor(@Param("authorId") String authorId);
 
 }

@@ -24,5 +24,4 @@ public class Author {
     private String lastName;
     @Column(name="password")
     private String password;
-
 }
