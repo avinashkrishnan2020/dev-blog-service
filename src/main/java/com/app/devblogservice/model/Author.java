@@ -1,6 +1,7 @@
 package com.app.devblogservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "author")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Author {
     @Id
     @Column(name = "author_id")

@@ -32,12 +32,12 @@ public class BlogServiceControllerAdvice {
     }
 
     @ExceptionHandler(TransientPropertyValueException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<BlogServiceErrorResponse> handleServeError(Exception ex){
         BlogServiceErrorResponse errorResponse = new BlogServiceErrorResponseBuilder()
                 .status(Constants.FAILED)
                 .message(ErrorMessage.INVALID_DETAILS)
-                .errorCode(Constants.SERVER_ERROR)
+                .errorCode(Constants.BAD_REQUEST)
                 .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -55,14 +55,14 @@ public class BlogServiceControllerAdvice {
     }
 
     @ExceptionHandler(LoginFailedException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<BlogServiceErrorResponse> serveLoginFailedException(Exception ex){
         BlogServiceErrorResponse errorResponse = new BlogServiceErrorResponseBuilder()
                 .status(Constants.FAILED)
                 .message(ex.getMessage())
-                .errorCode(Constants.BAD_REQUEST)
+                .errorCode(Constants.NOT_FOUND)
                 .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 
     }
 }

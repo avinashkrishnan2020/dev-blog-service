@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ViewArticlesService {
@@ -20,13 +21,18 @@ public class ViewArticlesService {
 
     public List<Article> getAllArticles() {
         return Optional.ofNullable(this.articleRepository.findAll())
-                .orElse(new ArrayList<>());
+                .orElse(new ArrayList<>())
+                .stream()
+                .peek(article->article.getAuthor().setPassword(null))
+                .collect(Collectors.toList());
 
     }
 
     public List<Article> getAllArticlesByAuthor(String authorId) throws DatabaseConnectivityException {
-        List<Article> articles = this.articleRepository.findByAuthor(authorId);
-        return articles;
-
+        return Optional.ofNullable(this.articleRepository.findByAuthor(authorId))
+                .orElse(new ArrayList<>())
+                .stream()
+                .peek(article->article.getAuthor().setPassword(null))
+                .collect(Collectors.toList());
     }
 }

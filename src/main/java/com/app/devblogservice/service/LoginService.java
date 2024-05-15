@@ -32,8 +32,8 @@ public class LoginService {
         Author user = authorRepository.findByAuthorIdAndPassword(loginDetails.getUsername(),
                 loginDetails.getPassword());
         Optional.ofNullable(user).
-                orElseThrow(() -> new LoginFailedException(ErrorMessage.LOGIN_FAILED))
-                .setPassword(Constants.EMPTY_STRING);
+                orElseThrow(() -> new LoginFailedException(ErrorMessage.USER_NOT_FOUND))
+                .setPassword(null);
         return user;
     }
 

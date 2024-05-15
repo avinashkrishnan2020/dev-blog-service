@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/signup")
 public class SignUpController {
 
     private final SignUpService signUpService;
@@ -24,7 +23,7 @@ public class SignUpController {
         this.signUpService = signUpService;
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     @Operation(summary = "API to sign up a new user/author")
     public ResponseEntity<Author> signUpNewUser(@RequestBody Author userDetails) throws AuthorExistsException, BadRequestException {
         return new ResponseEntity<>(signUpService.signUpAuthor(userDetails), HttpStatus.OK);

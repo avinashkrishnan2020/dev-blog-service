@@ -1,6 +1,7 @@
 package com.app.devblogservice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "article")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Article {
     @Id
     @Column(name="article_id")

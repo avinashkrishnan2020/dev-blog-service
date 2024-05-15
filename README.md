@@ -32,7 +32,9 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
         body TEXT NOT NULL,
         publish_at TIMESTAMP NOT NULL,
         author_id VARCHAR(100) NOT NULL,
-        FOREIGN KEY(author_id) REFERENCES author.author_id CASCADE ON DELETE
+        FOREIGN KEY(author_id) REFERENCES author.author_id
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
     );
     
     # Sequence for automatically incrementing primary key in article table
@@ -73,3 +75,33 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
   - Service level logic are placed in this package.
 - util
   - Utility classes and custom constants are defined in this package.
+
+## Sample Requests
+
+- POST localhost:8081/signup 
+  - ```bash
+    {
+      "authorId":"chris.richard@yopmail.com",
+      "firstName":"Christopher",
+      "lastName":"Richard",
+      "password": "def453457@789"
+    }
+    ```
+
+- GET localhost:8081/article
+  - ```bash
+    # no request body
+    ```
+    
+- GET localhost:8081/article?authorId="chris.richard@yopmail.com"
+  - ```bash
+    # no request body
+    ```
+    
+- POST localhost:8081/login
+  - ```bash
+      {
+        "username": "chris.richard@yopmail.com"
+        "password": "def453457@789"
+      }
+      ``` 

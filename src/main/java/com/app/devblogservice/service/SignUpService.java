@@ -24,7 +24,7 @@ public class SignUpService {
         checkSignUpDetails(signUpDetails);
         checkAuthorExists(signUpDetails);
         Author author = authorRepository.saveAndFlush(signUpDetails);
-        author.setPassword("");
+        author.setPassword(null);
         return author;
     }
 
