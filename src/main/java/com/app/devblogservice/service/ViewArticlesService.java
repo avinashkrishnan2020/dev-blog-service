@@ -21,18 +21,13 @@ public class ViewArticlesService {
 
     public List<Article> getAllArticles() {
         return Optional.ofNullable(this.articleRepository.findAll())
-                .orElse(new ArrayList<>())
-                .stream()
-                .peek(article->article.getAuthor().setPassword(null))
-                .collect(Collectors.toList());
+                .orElse(new ArrayList<>());
 
     }
 
-    public List<Article> getAllArticlesByAuthor(String authorId) throws DatabaseConnectivityException {
+    public List<Article> getAllArticlesByAuthor(String authorId) {
+
         return Optional.ofNullable(this.articleRepository.findByAuthor(authorId))
-                .orElse(new ArrayList<>())
-                .stream()
-                .peek(article->article.getAuthor().setPassword(null))
-                .collect(Collectors.toList());
+                .orElse(new ArrayList<>());
     }
 }

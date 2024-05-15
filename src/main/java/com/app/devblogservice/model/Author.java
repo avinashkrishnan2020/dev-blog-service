@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 
 @NoArgsConstructor
@@ -26,4 +27,5 @@ public class Author {
     private String lastName;
     @Column(name="password")
     private String password;
+
 }

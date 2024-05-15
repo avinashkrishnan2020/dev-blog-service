@@ -44,7 +44,7 @@ public class DevBlogController {
 
     @GetMapping(params={"authorId"})
     @Operation(summary = "API for retrieving articles written by an author (using author id)")
-    public ResponseEntity<List<Article>> getArticlesByAuthor(@RequestParam(name="authorId", required=false)String authorId) throws DatabaseConnectivityException {
+    public ResponseEntity<List<Article>> getArticlesByAuthor(@RequestParam(name="authorId", required=true)String authorId) throws DatabaseConnectivityException {
         return new ResponseEntity<>(this.viewArticlesService.getAllArticlesByAuthor(authorId), HttpStatus.OK);
     }
 }

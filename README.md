@@ -93,11 +93,23 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
     # no request body
     ```
     
-- GET localhost:8081/article?authorId="chris.richard@yopmail.com"
+- GET localhost:8081/article?authorId=chris.richard@yopmail.com
   - ```bash
     # no request body
     ```
-    
+
+- POST localhost:8081/article
+  - ```bash
+    {
+      "title": "Spring Advanced",
+      "author": {
+         "authorId": "sam.williams@yopmail.com",
+         "firstName": "Samuel",
+         "lastName": "Williams"
+       },
+      "body": "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod" 
+    }
+    ```
 - POST localhost:8081/login
   - ```bash
       {

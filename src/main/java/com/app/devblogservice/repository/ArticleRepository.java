@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query("Select a from Article a where a.author.authorId =:authorId")
+    @Query("Select a from Article a where a.author.authorId = :authorId")
     public List<Article> findByAuthor(@Param("authorId") String authorId);
 
 }
