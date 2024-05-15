@@ -6,6 +6,7 @@ import com.app.devblogservice.exception.LoginFailedException;
 import com.app.devblogservice.model.Author;
 import com.app.devblogservice.model.LoginDetails;
 import com.app.devblogservice.service.LoginService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "API to login a user/author")
     public ResponseEntity<Author> loginUser(@RequestBody LoginDetails loginDetails) throws
             BadRequestException, LoginFailedException {
         return new ResponseEntity<>(this.loginService.verifyLoginDetails(loginDetails),
