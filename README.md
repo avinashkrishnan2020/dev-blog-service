@@ -53,3 +53,23 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
     - Error Responses
   - The link can also be used to try out sample requests.
 - JSON documentation can be viewed here: http://localhost:8081/api-docs
+
+
+## Package Structure
+- controller
+  - Consists of RestController classes
+- controlleradvice
+  - Global Exception Handler for the application.
+  - Handle exceptions here and return a response entity of type BlogServiceErrorResponse.class
+    - BlogServiceErrorResponse uses builder design pattern to construct error response easily.
+  - Provide appropriate HTTP error codes in the response
+- exception
+  - Provide custom exceptions here.
+- model
+  - Define entities used by the application here.
+- repository
+  - All JpaRepository<> implementations are provided here
+- service
+  - Service level logic are placed in this package.
+- util
+  - Utility classes and custom constants are defined in this package.
