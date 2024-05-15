@@ -47,6 +47,7 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
 
 ## API Documentation
 - Documentation for the API can be found here: http://localhost:8081/swagger-ui/index.html
+  - Make sure application is running on your local machine.
   - This link provides the following details
     - API contract
     - Error Responses
