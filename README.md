@@ -113,7 +113,7 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
 - POST localhost:8081/login
   - ```bash
       {
-        "username": "chris.richard@yopmail.com"
+        "username": "chris.richard@yopmail.com",
         "password": "def453457@789"
       }
       ``` 
