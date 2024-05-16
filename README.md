@@ -70,7 +70,7 @@ A simple project using Java and Spring Boot to create author profiles, and to pu
 - model
   - Define entities used by the application here.
 - repository
-  - All JpaRepository<> implementations are provided here
+  - All JpaRepository<T, ID> implementations are provided here
 - service
   - Service level logic are placed in this package.
 - util
